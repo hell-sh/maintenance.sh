@@ -1,36 +1,17 @@
-document.addEventListener("DOMContentLoaded",function()
-{
-	$("[type='checkbox']").change(function()
-	{
-		generateScript();
-	});
-});
-
+var script="";
 function generateScript()
 {
-	var script = "#!/bin/bash\n", useful = false;
-	script += "\n";
-	script += "cd $HOME\n";
-	script += "echo \"#!/bin/bash\" > maintainance.sh\n";
-	script += "echo \"\" >> maintainance.sh\n";
-	$("[type='checkbox']").each(function()
-	{
-		if(this.checked)
-		{
-			script += "echo \"echo -ne \\\"" + this.name + ": preparing" + " ".repeat(19 - this.name.length) + "\\\\r\\\"\" >> maintainance.sh\n";
-			script += "echo \"wget -qO- " + location.href + this.name + ".sh | bash\" >> maintainance.sh\n";
-			useful = true;
-		}
+	script="cd $HOME&&ex='!'&&echo \"#$ex/bin/bash\">maintainance.sh&&echo \"\">>maintainance.sh&&";
+	document.querySelectorAll("[type='checkbox']").forEach(c=>{
+		if(c.checked)
+			script+="echo \"echo -ne \\\""+c.name+": preparing"+" ".repeat(19-c.name.length)+"\\\\\\\\r\\\"\">>maintainance.sh&&echo \"wget -qO- "+location.href+c.name+".sh | bash\">>maintainance.sh&&"
 	});
-	script += "echo \"echo \\\"Thanks for using Maintainance.Hell.sh.\\\"\" >> maintainance.sh\n";
-	script += "chmod +x maintainance.sh\n";
-	script += "echo \"You may now run ~/maintainance.sh whenever you feel like it.\"\n";
-	if(useful)
-	{
-		$("#download").removeClass("uk-disabled").attr("href", "data:text/x-sh;base64," + btoa(script));
-	}
-	else
-	{
-		$("#download").addClass("uk-disabled");
-	}
+	script+="echo \"echo \\\"Thanks for using Maintainance.Hell.sh.\\\"\">>maintainance.sh&&";
+	script+="chmod +x maintainance.sh&&";
+	script+="echo \"You may now run ~/maintainance.sh whenever you feel like it.\"";
+	if(script.indexOf("preparing")>-1)
+		document.getElementById("copy-install").classList.remove("uk-disabled");
+	else document.getElementById("copy-install").classList.add("uk-disabled")
 }
+document.querySelectorAll("[type='checkbox']").forEach(c=>c.onchange=generateScript);
+document.getElementById("copy-install").onclick=()=>navigator.clipboard.writeText(script)

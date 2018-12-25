@@ -1,10 +1,19 @@
 #!/bin/bash
 
-cmd1() { cat /proc/mdstat | grep "\]\(F\)"; }
-if [ "$(cmd1)" == "" ]; then
+if [ ! -f /proc/mdstat ]; then
+	echo "There is no RAID on this system."
+	exit 0
+fi
+cmd() { grep "active" < /proc/mdstat; }
+if [ "$(cmd)" == "" ]; then
+	echo "There is no active RAID on this system."
+	exit 0
+fi
+cmd() { grep "\]\(F\)" < /proc/mdstat; }
+if [ "$(cmd)" == "" ]; then
 	echo "No hard drive has failed.      "
-	cmd2() { cat /proc/mdstat | grep "resync"; }
-	if [ "$(cmd2)" != "" ]; then
+	cmd() { cat /proc/mdstat | grep "resync"; }
+	if [ "$(cmd)" != "" ]; then
 		echo "A RAID resync is in progress. "
 	fi
 else
