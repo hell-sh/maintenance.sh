@@ -1,1 +1,35 @@
-<meta http-equiv="refresh" content="0;url=https://github.com/hell-sh/Maintainance-Hell">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maintainance Hell</title>
+	<meta name="title" content="Maintainance Hell">
+	<meta name="description" content="Making the maintainance of your servers just a bit easier.">
+	<meta name="copyright" content="Copyright (c) 2017-2018, Hellsh">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Maintainance Hell">
+	<meta name="twitter:author" content="@helldotsh">
+	<meta name="twitter:description" content="Making the maintainance of your servers just a bit easier.">
+	<meta property="og:site_name" content="Maintainance Hell">
+	<meta property="og:title" content="Maintainance Hell">
+	<meta property="og:description" content="Making the maintainance of your servers just a bit easier.">
+	<meta property="og:type" content="website">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css">
+</head>
+<body class="uk-margin-left uk-margin-right">
+	<div class="uk-container">
+		<div class="uk-margin-top uk-margin-bottom">
+			<h1>Maintainance Hell</h1>
+			<p>What should your maintainance script do when you run it?</p>
+			<ul style="list-style:none">
+				<li><input type="checkbox" id="backup" name="backup"><label for="backup"> Backup important files</label></li>
+				<li><input type="checkbox" id="aptgrade" name="aptgrade"><label for="aptgrade"> Update installed apt-get packages</label></li>
+				<li><input type="checkbox" id="raidinfo" name="raidinfo"><label for="raidinfo"> Report RAID status</label></li>
+			</ul>
+			<p><a id="download" download="installer.sh" class="uk-button uk-button-primary uk-disabled">Download installer.sh</a></p>
+			<script src="https://cdn.hell.sh/jquery/latest/core.js" crossorigin="anonymous"></script>
+			<script src="script.js"></script>
+		</div>
+	</div>
+</body>
+</html>
