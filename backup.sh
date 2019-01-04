@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd /
 if [ -f "$HOME/backup.tar" ]; then
-	rm $HOME/backup.tar
+	rm "$HOME/backup.tar"
 fi
 if [ -f "$HOME/backup.tar.gz" ]; then
 	rm "$HOME/backup.tar.gz"
@@ -41,5 +40,4 @@ if [ -d /var/www ]; then
 	tar -rf "$HOME/backup.tar" /var/www >/dev/null 2>&1
 fi
 echo -ne "backup: compressing           \r"
-tar -czf "$HOME/backup.tar.gz" "$HOME/backup.tar" >/dev/null 2>&1
-rm "$HOME/backup.tar"
+gzip "$HOME/backup.tar" >/dev/null 2>&1
