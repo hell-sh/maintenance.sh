@@ -10,7 +10,7 @@ echo -ne "backup: home                  \r"
 tar -cf "$HOME/backup.tar" "$HOME" >/dev/null 2>&1
 if [ "$(which mysqldump)" != "" ]; then
 	echo -ne "backup: mysql tables          \r"
-	tmpfile=/tmp/$(mktemp XXXXXXXXXX.sql)
+	tmpfile=$(mktemp /tmp/XXXXXXXXXX.sql)
 	mysqldump -A > "$tmpfile"
 	tar -rf "$HOME/backup.tar" "$tmpfile" >/dev/null 2>&1
 	rm "$tmpfile"
