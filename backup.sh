@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ $("whoami") != "root" ]; then
+	echo "You need to be root to perform a backup"
+	return 1
+fi
 if [ -f "$HOME/backup.tar" ]; then
 	rm "$HOME/backup.tar"
 fi
@@ -10,10 +14,12 @@ echo -ne "backup: home                  \r"
 tar -cf "$HOME/backup.tar" "$HOME" >/dev/null 2>&1
 if [ "$(which mysqldump)" != "" ]; then
 	echo -ne "backup: mysql tables          \r"
-	tmpfile=$(mktemp /tmp/XXXXXXXXXX.sql)
-	mysqldump -A > "$tmpfile"
-	tar -rf "$HOME/backup.tar" "$tmpfile" >/dev/null 2>&1
-	rm "$tmpfile"
+	if [ -f /mysql_backup.sql ]; then
+		rm /mysql_backup.sql
+	fi
+	mysqldump -A > /mysql_backup.sql
+	tar -rf "$HOME/backup.tar" /mysql_backup.sql >/dev/null 2>&1
+	rm /mysql_backup.sql
 fi
 if [ -d /etc/apache2 ]; then
 	echo -ne "backup: apache2               \r"
