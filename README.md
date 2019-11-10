@@ -1,5 +1,9 @@
-# Maintainance Hell
+# maintenance.sh
 
-Making the maintainance of your servers just a bit easier.
+The all-in-one script for your server's maintenance needs.
 
-- [Vist Maintainance.Hell.sh](https://maintainance.hell.sh)
+## Installation
+
+	wget -qO- https://maintenance.hell.sh/maintenance.sh > maintenance.sh && chmod +x maintenance.sh
+
+and then you can run `./maintenance.sh` whenever you want.
