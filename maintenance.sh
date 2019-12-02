@@ -14,8 +14,12 @@ fi
 if [ -f "$HOME/backup.tar.gz" ]; then
 	rm "$HOME/backup.tar.gz"
 fi
-echo -ne "backup: home                  \r"
+echo -ne "backup: $HOME                 \r"
 tar -cf "$HOME/backup.tar" "$HOME" >/dev/null 2>&1
+if [ -d /home ]; then
+	echo -ne "backup: /home                 \r"
+	tar -cf "$HOME/backup.tar" /home >/dev/null 2>&1
+fi
 if [ "$(which mysqldump)" != "" ]; then
 	echo -ne "backup: mysql tables          \r"
 	if [ -f /mysql_backup.sql ]; then
