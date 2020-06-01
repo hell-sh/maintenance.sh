@@ -37,6 +37,10 @@ if [ -d /etc/bind ]; then
 	echo -ne "backup: bind                  \r"
 	tar -rf "$HOME/backup.tar" /etc/bind >/dev/null 2>&1
 fi
+if [ -d /etc/letsencrypt ]; then
+	echo -ne "backup: letsencrypt           \r"
+	tar -rf "$HOME/backup.tar" /etc/letsencrypt >/dev/null 2>&1
+fi
 if [ -d /etc/php ]; then
 	echo -ne "backup: php                   \r"
 	tar -rf "$HOME/backup.tar" /etc/php >/dev/null 2>&1
