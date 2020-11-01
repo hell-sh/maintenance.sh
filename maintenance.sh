@@ -76,7 +76,6 @@ echo -ne "getting raid info...          \r"
 
 if [ ! -f /proc/mdstat ]; then
 	echo "There is no RAID on this system."
-	exit 0
 else
 	cmd() { grep "active" < /proc/mdstat; }
 	if [ "$(cmd)" == "" ]; then
